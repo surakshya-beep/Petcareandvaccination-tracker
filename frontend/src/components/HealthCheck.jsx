@@ -7,6 +7,7 @@ import PetHealthStatus from './PetHealthStatus'
 import HealthReminders from './HealthReminders'
 import { Heart, AlertCircle, Calendar, Activity, BookOpen, ArrowRight } from 'lucide-react'
 import mockPets from '../data/mockPets'
+import { checkVaccineStatus } from '../utils/vaccineUtils'
 
 const HealthCheck = () => {
   const [activeTab, setActiveTab] = useState('overview')
@@ -27,10 +28,8 @@ const HealthCheck = () => {
 
   // Calculate health stats
   const totalPets = mockPets.length
-  const healthyCount = mockPets.filter(p => {
-    const records = p.medicalRecords || []
-    return records.length > 0 && records[records.length - 1].status === 'Completed'
-  }).length
+  const healthyCount = mockPets.filter(p => checkVaccineStatus(p.medicalRecords).status === 'Healthy').length
+  const pendingCareCount = mockPets.filter(p => checkVaccineStatus(p.medicalRecords).status !== 'Healthy').length
 
   const tabs = [
     { id: 'overview', label: 'Health Overview', icon: Heart },
@@ -88,7 +87,7 @@ const HealthCheck = () => {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-slate-600 text-sm font-semibold uppercase mb-1">Pending Care</p>
-                  <p className="text-3xl font-bold text-amber-600">{totalPets - healthyCount}</p>
+                  <p className="text-3xl font-bold text-amber-600">{pendingCareCount}</p>
                 </div>
                 <span className="text-4xl">⏰</span>
               </div>

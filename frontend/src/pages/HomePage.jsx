@@ -5,29 +5,41 @@ import { ArrowRight, Zap, Calendar, Heart, Shield, BarChart3, Bell } from 'lucid
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import useAuthStore from '../store/authStore'
+import mockPets from '../data/mockPets'
+import { checkVaccineStatus } from '../utils/vaccineUtils'
 
 const HomePage = () => {
   const navigate = useNavigate()
   const user = useAuthStore(state => state.user)
-
-  const quickStats = [
-    { icon: '🐾', label: 'Pets', value: '3' },
-    { icon: '✅', label: 'Healthy Pets', value: '2' },
-    { icon: '⚠️', label: 'Pending Tasks', value: '1' },
-    { icon: '📅', label: 'Upcoming', value: '2' }
-  ]
-
-  const recentPets = [
-    { id: 1, name: 'Charlie', species: '🐕', status: '✅ Healthy' },
-    { id: 2, name: 'Luna', species: '🐈', status: '⚠️ Attention' },
-    { id: 3, name: 'Max', species: '🐕', status: '✅ Healthy' }
-  ]
 
   // Real upcoming appointments from schedule
   const upcomingEvents = [
     { pet: 'Charlie', type: 'Rabies Vaccine', date: 'Mar 24, 2026', icon: '💉', time: '2:30 PM' },
     { pet: 'Luna', type: 'Annual Checkup', date: 'Mar 24, 2026', icon: '👨‍⚕️', time: '3:45 PM' }
   ]
+
+  const totalPets = mockPets.length
+  const healthyCount = mockPets.filter(p => checkVaccineStatus(p.medicalRecords).status === 'Healthy').length
+  const pendingCount = mockPets.filter(p => checkVaccineStatus(p.medicalRecords).status !== 'Healthy').length
+
+  const quickStats = [
+    { icon: '🐾', label: 'Pets', value: totalPets.toString() },
+    { icon: '✅', label: 'Healthy Pets', value: healthyCount.toString() },
+    { icon: '⚠️', label: 'Pending Tasks', value: pendingCount.toString() },
+    { icon: '📅', label: 'Upcoming', value: upcomingEvents.length.toString() }
+  ]
+
+  const recentPets = mockPets.slice(0, 3).map(pet => {
+    const statusObj = checkVaccineStatus(pet.medicalRecords)
+    return {
+      id: pet.id,
+      name: pet.name,
+      species: pet.petEmoji || '🐾',
+      status: statusObj.status === 'Healthy' ? '✅ Healthy' : statusObj.status === 'Warning' ? '⚠️ Attention' : '🚨 Critical'
+    }
+  })
+
+
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -187,4 +199,4 @@ const HomePage = () => {
   )
 }
 
-export default HomePage
+export default HomePage

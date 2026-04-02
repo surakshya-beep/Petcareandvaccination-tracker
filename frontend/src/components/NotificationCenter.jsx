@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, Check, Trash2, AlertCircle, Info, AlertTriangle, CheckCircle } from 'lucide-react'
 import useNotificationStore from '../store/notificationStore'
@@ -49,7 +50,7 @@ const NotificationCenter = ({ isOpen, onClose }) => {
     }
   }
 
-  return (
+  return typeof document !== 'undefined' ? createPortal(
     <AnimatePresence>
       {isOpen && (
         <>
@@ -175,8 +176,9 @@ const NotificationCenter = ({ isOpen, onClose }) => {
           </motion.div>
         </>
       )}
-    </AnimatePresence>
-  )
+    </AnimatePresence>,
+    document.body
+  ) : null
 }
 
 export default NotificationCenter

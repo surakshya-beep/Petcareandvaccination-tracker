@@ -115,11 +115,11 @@ const Navbar = () => {
                         initial={{ opacity: 0, y: -10, scale: 0.95 }}
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: -10, scale: 0.95 }}
-                        className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl border border-slate-200 z-10"
+                        className="absolute right-0 mt-2 w-64 bg-white rounded-lg shadow-xl border border-slate-200 z-10"
                       >
                         <div className="p-4 border-b border-slate-200">
-                          <p className="font-semibold text-slate-900">{user?.name || 'Pet Parent'}</p>
-                          <p className="text-sm text-slate-600">{user?.email || 'user@email.com'}</p>
+                          <p className="font-semibold text-slate-900 truncate" title={user?.name || 'Pet Parent'}>{user?.name || 'Pet Parent'}</p>
+                          <p className="text-sm text-slate-600 truncate" title={user?.email || 'user@email.com'}>{user?.email || 'user@email.com'}</p>
                         </div>
                         <div className="py-2">
                           <button className="w-full text-left px-4 py-2 hover:bg-slate-50 flex items-center gap-2 text-slate-600 hover:text-slate-900 transition">

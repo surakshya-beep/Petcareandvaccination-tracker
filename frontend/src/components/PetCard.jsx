@@ -29,14 +29,18 @@ const PetCard = ({ pet }) => {
       >
         {/* Header Background */}
         <div className={`h-36 bg-gradient-to-br ${status.bgColor} relative overflow-hidden`}>
-          {/* Animated background */}
-          <motion.div
-            animate={{ scale: [1, 1.05, 1] }}
-            transition={{ duration: 4, repeat: Infinity }}
-            className="absolute inset-0 opacity-20"
-          >
-            <div className="absolute top-2 right-2 text-5xl">{pet.species === 'Dog' ? '🐕' : '🐈'}</div>
-          </motion.div>
+          {/* Photo or Animated background fallback */}
+          {pet.photoURL ? (
+             <img src={pet.photoURL} alt={pet.name} className="w-full h-full object-cover mix-blend-overlay opacity-60 scale-105" />
+          ) : (
+            <motion.div
+              animate={{ scale: [1, 1.05, 1] }}
+              transition={{ duration: 4, repeat: Infinity }}
+              className="absolute inset-0 opacity-20"
+            >
+              <div className="absolute top-2 right-2 text-5xl">{pet.species === 'Dog' ? '🐕' : '🐈'}</div>
+            </motion.div>
+          )}
           <div className="absolute inset-0 bg-black/5"></div>
 
           {/* Status Badge - Top Right */}

@@ -14,8 +14,8 @@ const CartPage = () => {
 
   // Calculate totals
   const subtotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0)
-  const tax = subtotal * 0.08
-  const shipping = cart.length > 0 ? 10 : 0
+  const tax = subtotal * 0.13
+  const shipping = cart.length > 0 ? 150 : 0
   const total = subtotal + tax + shipping
 
   return (
@@ -90,7 +90,7 @@ const CartPage = () => {
                             {item.category}
                           </p>
                           <p className="text-lg font-bold text-primary-600">
-                            ${item.price.toFixed(2)}
+                            Rs. {item.price.toLocaleString('en-IN')}
                           </p>
                         </div>
 
@@ -128,7 +128,7 @@ const CartPage = () => {
                           </div>
 
                           <p className="font-semibold text-slate-900">
-                            ${(item.price * item.quantity).toFixed(2)}
+                            Rs. {(item.price * item.quantity).toLocaleString('en-IN')}
                           </p>
                         </div>
                       </motion.div>
@@ -152,19 +152,19 @@ const CartPage = () => {
                   <div className="flex justify-between">
                     <span className="text-slate-600">Subtotal</span>
                     <span className="font-semibold text-slate-900">
-                      ${subtotal.toFixed(2)}
+                      Rs. {subtotal.toLocaleString('en-IN')}
                     </span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-slate-600">Tax (8%)</span>
+                    <span className="text-slate-600">Tax (13%)</span>
                     <span className="font-semibold text-slate-900">
-                      ${tax.toFixed(2)}
+                      Rs. {tax.toLocaleString('en-IN')}
                     </span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-slate-600">Shipping</span>
                     <span className="font-semibold text-slate-900">
-                      ${shipping.toFixed(2)}
+                      Rs. {shipping.toLocaleString('en-IN')}
                     </span>
                   </div>
                 </div>
@@ -172,7 +172,7 @@ const CartPage = () => {
                 <div className="flex justify-between mb-6 text-xl font-bold text-slate-900">
                   <span>Total</span>
                   <span className="text-primary-600">
-                    ${total.toFixed(2)}
+                    Rs. {total.toLocaleString('en-IN')}
                   </span>
                 </div>
 
@@ -194,7 +194,7 @@ const CartPage = () => {
 
                 <div className="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
                   <p className="text-sm text-slate-600">
-                    ✨ <span className="font-semibold">Free shipping</span> on orders over $100!
+                    ✨ <span className="font-semibold">Free shipping</span> on orders over Rs. 5000!
                   </p>
                 </div>
               </motion.div>

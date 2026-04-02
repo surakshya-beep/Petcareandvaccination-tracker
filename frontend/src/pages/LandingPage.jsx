@@ -187,7 +187,7 @@ const LandingPage = () => {
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-r from-primary-500 to-blue-500 rounded-3xl blur-2xl opacity-20"></div>
                 <div className="relative card p-8">
-                  <img src="https://cdn-icons-png.flaticon.com/512/3047/3047928.png" alt="Happy Pet" className="w-full" />
+                  <img src="/hero_pet_image.png" alt="Happy Dogs and Cats" className="w-full rounded-2xl shadow-xl object-cover" />
                 </div>
               </div>
             </motion.div>

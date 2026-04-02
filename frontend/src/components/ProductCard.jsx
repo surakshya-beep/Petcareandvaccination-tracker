@@ -86,7 +86,7 @@ const ProductCard = ({ product }) => {
         <div className="flex items-center justify-between gap-3 mt-auto pt-4 border-t border-slate-200">
           <div>
             <p className="text-2xl font-bold text-slate-900">
-              ${product.price.toFixed(2)}
+              Rs. {product.price.toLocaleString('en-IN')}
             </p>
           </div>
           <motion.button

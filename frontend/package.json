@@ -4,7 +4,7 @@
   "type": "module",
   "description": "Modern Pet Health Care Tracker - Frontend",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint src"

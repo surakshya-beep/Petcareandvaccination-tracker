@@ -11,7 +11,7 @@ const ShopPage = () => {
   const [searchTerm, setSearchTerm] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('All')
   const [sortBy, setSortBy] = useState('name')
-  const [priceRange, setPriceRange] = useState([0, 150])
+  const [priceRange, setPriceRange] = useState([0, 20000])
   const cartItems = useCartStore(state => state.cart)
   const totalItems = useCartStore(state => state.getTotalItems(state))
 
@@ -149,14 +149,14 @@ const ShopPage = () => {
                     <input
                       type="range"
                       min="0"
-                      max="150"
+                      max="20000"
                       value={priceRange[1]}
                       onChange={(e) => setPriceRange([priceRange[0], parseInt(e.target.value)])}
                       className="w-full"
                     />
                     <div className="flex items-center justify-between text-sm">
-                      <span className="text-slate-600">${priceRange[0]}</span>
-                      <span className="text-slate-600">${priceRange[1]}</span>
+                      <span className="text-slate-600">Rs. {priceRange[0]}</span>
+                      <span className="text-slate-600">Rs. {priceRange[1]}</span>
                     </div>
                   </div>
                 </div>
@@ -184,7 +184,7 @@ const ShopPage = () => {
                     setSearchTerm('')
                     setSelectedCategory('All')
                     setSortBy('name')
-                    setPriceRange([0, 150])
+                    setPriceRange([0, 20000])
                   }}
                   className="w-full px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-900 font-semibold rounded-lg transition"
                 >
